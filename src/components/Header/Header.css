@@ -1,0 +1,18 @@
+.headerNav {
+height: 80px;
+background-color: #1C2B35;
+display: flex;
+align-items: center;
+justify-content:space-between;
+padding: 0px 139px 0px 146px;
+}
+
+.headerNav a{
+    color:white;
+    text-decoration: none;
+    margin: 0px 20px;
+}
+
+.headerNav a:hover {
+color: orange;
+}
