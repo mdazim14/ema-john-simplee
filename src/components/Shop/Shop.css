@@ -11,6 +11,8 @@
 }
 
 .card-container {
+    position: sticky;
+    top: 0px;
     background-color: rgb(247, 213, 139);
     height: 54rem;
 }
