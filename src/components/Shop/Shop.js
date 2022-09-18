@@ -15,9 +15,13 @@ const Shop = () => {
     }, [])
 
     const handleAddToCart = (product) => {
+        const {id} = product;
+        console.log("ID", id);
         console.log(product)
         const newCart = [...cart, product];
         setCart(newCart);
+        localStorage.setItem(id, 1)
+
     }
 
     return (
