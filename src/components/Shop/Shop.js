@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
+import { addToDb } from '../Utilities/FakeDb';
 import './Shop.css';
 
 const Shop = () => {
@@ -16,11 +17,13 @@ const Shop = () => {
 
     const handleAddToCart = (product) => {
         const {id} = product;
-        console.log("ID", id);
-        console.log(product)
+        // console.log("ID", id);
+        // console.log(product)
         const newCart = [...cart, product];
         setCart(newCart);
-        localStorage.setItem(id, 1)
+        
+        // addTo LocalStorage Cart Data 
+        addToDb(id);
 
     }
 
