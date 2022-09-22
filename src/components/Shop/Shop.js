@@ -1,17 +1,31 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
+import { addToDb } from '../Utilities/FakeDb';
 import './Shop.css';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         fetch('products.json')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
+
+    const handleAddToCart = (product) => {
+        const {id} = product;
+        // console.log("ID", id);
+        // console.log(product)
+        const newCart = [...cart, product];
+        setCart(newCart);
+        
+        // addTo LocalStorage Cart Data 
+        addToDb(id);
+
+    }
 
     return (
         <div className="shop-container">
@@ -21,12 +35,15 @@ const Shop = () => {
                     products.map(product => <Product
                         key={product.id}
                         product={product}
-                        ></Product>)
+                        handleAddToCart={handleAddToCart}
+                    ></Product>)
                 }
             </div>
 
             <div className="card-container">
-                <h4>Order Summary</h4>
+                <Cart
+                    cart={cart}
+                ></Cart>
             </div>
 
         </div>
