@@ -25,6 +25,7 @@ const Cart = (props) => {
                 <h5>Grand Total: ${grandTotal.toFixed(2)} </h5>
                 
                 <h5>Clear Cart</h5>
+                <h5>Clear Cart</h5>
         </div>
     );
 };
