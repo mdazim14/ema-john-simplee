@@ -17,7 +17,7 @@ const addToDb = id => {
     const quantity = shoppingCart[id];
     console.log("seconded", quantity);
 
-    if (quantity) {
+    if (quantity){
         const newQuantity = +quantity + 1;
         shoppingCart[id] = newQuantity;
         console.log("third", shoppingCart);
