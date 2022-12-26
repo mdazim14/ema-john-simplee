@@ -16,7 +16,7 @@ const addToDb = id => {
     // add quantity 
     const quantity = shoppingCart[id];
     if (quantity) {
-        const newQuantity = +quantity + 1;
+        const newQuantity = quantity + 1;
         shoppingCart[id] = newQuantity;
         console.log("shopping", shoppingCart.id);
     }
@@ -27,7 +27,33 @@ const addToDb = id => {
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
 }
 
-export { addToDb }
+const removeFromCart = (id) => {
+    // let shoppingCart = {};
+    const storedCart = localStorage.getItem('shopping-cart');
+    if (storedCart) {
+        const shoppingCart = JSON.parse(storedCart);
+        if (id in shoppingCart) {
+            const { id } = shoppingCart;
+            if (id.length > 1) {
+                const newQuantity = id - 1;
+                shoppingCart[id] = newQuantity;
+            }
+            else
+                delete shoppingCart[id];
+        }
+        localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+
+    }
+
+    // localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+
+}
+
+
+export {
+    addToDb,
+    removeFromCart
+}
 
 
 

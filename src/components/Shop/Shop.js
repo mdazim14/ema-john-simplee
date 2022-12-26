@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
-import { addToDb } from '../Utilities/FakeDb';
+import { addToDb, removeFromCart } from '../Utilities/FakeDb';
 import './Shop.css';
 
 const Shop = () => {
@@ -29,6 +29,12 @@ const Shop = () => {
         addToDb(id);
     }
 
+    const handleRemoveFromCart = (product) => {
+        const {id} = product;        
+        // removeFrom LocalStorage Cart Data 
+        removeFromCart(id);
+    }
+
     return (
         <div className="shop-container">
 
@@ -38,6 +44,7 @@ const Shop = () => {
                         key={product.id}
                         product={product}
                         handleAddToCart={handleAddToCart}
+                        handleRemoveFromCart={handleRemoveFromCart}
                     ></Product>)
                 }
             </div>
