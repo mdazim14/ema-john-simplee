@@ -16,15 +16,17 @@ const Shop = () => {
     }, [])
 
     const handleAddToCart = (product) => {
+        
+        // const id = product;
+        // console.log("product",product);
+        // Here is distructure of product 
         const {id} = product;
-        // console.log("ID", id);
-        // console.log(product)
+
         const newCart = [...cart, product];
         setCart(newCart);
         
         // addTo LocalStorage Cart Data 
         addToDb(id);
-
     }
 
     return (
