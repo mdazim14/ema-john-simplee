@@ -23,30 +23,43 @@ const addToDb = id => {
     else {
         shoppingCart[id] = 1;
     }
-
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
 }
 
+
+
+//decrement quantity and delete id from Cart
+
 const removeFromCart = (id) => {
-    // let shoppingCart = {};
+    // console.log(id);
+
     const storedCart = localStorage.getItem('shopping-cart');
     if (storedCart) {
         const shoppingCart = JSON.parse(storedCart);
+        // console.log(shoppingCart);
         if (id in shoppingCart) {
-            const { id } = shoppingCart;
-            if (id.length > 1) {
-                const newQuantity = id - 1;
+
+            // const newQuantity = shoppingCart[id] - 1;
+            // shoppingCart[id] = newQuantity;
+            // localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+            
+            // delete shoppingCart[id];
+            // localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+
+
+
+            // decrement quantity of cart data and delete id
+            const Quantity = shoppingCart[id]
+            if (Quantity > 1) {
+                const newQuantity = Quantity - 1;
                 shoppingCart[id] = newQuantity;
+                localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
             }
             else
                 delete shoppingCart[id];
+            localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
         }
-        localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
-
     }
-
-    // localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
-
 }
 
 
