@@ -72,3 +72,6 @@ margin: 7px;
 .btn-cart:hover {
     background-color: orange;
 }
+.btn-cart button {
+    height: 60px;
+}
