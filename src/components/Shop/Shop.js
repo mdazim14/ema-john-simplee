@@ -17,34 +17,34 @@ const Shop = () => {
 
     useEffect(() => {
         const storedCart = getStoredCart();
-        
         const savedCart = [];
         for (const id in storedCart) {
-            // console.log(id);
-            // console.log(products)
-            const addedProduct = products.find(product => product.id === id);
-            if(addedProduct) {
+            const addedProduct = products.find(product => product.id === id)
+            if (addedProduct) {
                 const quantity = storedCart[id];
-                addedProduct.quantity = quantity
-                savedCart.push(addedProduct);
-                // console.log(addedProduct);
+                addedProduct.quantity = quantity;
+                savedCart.push(addedProduct)
             }
         }
         setCart(savedCart);
     }, [products])
 
-    const handleAddToCart = (product) => {
+    const handleAddToCart = (selectedProduct) => {
+        // console.log(selectedProduct)
+        let newCart = [];
+        const exists = cart.find(product => product.id === selectedProduct.id)
+        if (!exists) {
+            selectedProduct.quantity = 1;
+            newCart = [...cart, selectedProduct];
+        }
+        else{
+            const rest = cart.filter(product => product.id !== selectedProduct.id)
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, exists]
+        }
 
-        // const id = product;
-        // console.log("product",product);
-        // Here is distructure of product 
-        const { id } = product;
-
-        const newCart = [...cart, product];
         setCart(newCart);
-
-        // addTo LocalStorage Cart Data 
-        addToDb(id);
+        addToDb(selectedProduct.id);
     }
 
     const handleRemoveFromCart = (product) => {

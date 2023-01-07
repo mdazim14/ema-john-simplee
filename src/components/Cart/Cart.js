@@ -3,8 +3,6 @@ import './Cart.css';
 
 const Cart = (props) => {
     const {cart} = props;
-    // console.log("Cart page",cart);
-
     let total = 0;
     let shipping = 0;
     let quantity = 0;
@@ -20,14 +18,12 @@ const Cart = (props) => {
     return (
         <div className='Cart'>
             <h2>Order Summary</h2>
-                <p>Selected Items: {cart.length}</p>
+                <p>Selected Items: {quantity}</p>
                 <p>Total price: ${total}</p>
                 <p>Total shipping: ${shipping}</p>
                 <p>Tax: ${tax}</p>
                 <h5>Grand Total: ${grandTotal.toFixed(2)} </h5>
                 
-                <h5>Clear Cart</h5>
-                <h5>Clear Cart</h5>
         </div>
     );
 };
