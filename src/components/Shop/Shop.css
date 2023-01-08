@@ -11,10 +11,11 @@
 }
 
 .card-container {
-    position: sticky;
+    /* position: sticky; */
     top: 0px;
+    padding-left: 20px;
     background-color: rgb(247, 213, 139);
-    height: 54rem;
+    /* height: 54rem;s */
 }
 
 @media screen and (max-width:1100px) {
