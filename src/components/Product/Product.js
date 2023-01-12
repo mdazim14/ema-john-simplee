@@ -1,32 +1,43 @@
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import './Product.css';
 
 const Product = (props) => {
     // console.log(props)
-    const { handleAddToCart, handleRemoveFromCart, product } = props;
+    const { handleAddToCart, handleRemoveFromCart, product, handleAddToFavourite } = props;
     const { name, img, price, seller, ratings } = product;
 
     return (
         <div className="product">
-            <img src={img} alt="" />
-            <p className="product-name">{name}</p>
-
-            <div className="product-smallInfo">
-                <p className="product-price">Price: ${price}</p>
-                <p className="product-Manufacture">Manufacturer: {seller}</p>
-                <p className="product-Manufacture">Rating: {ratings}</p>
+            <div className=" w-100 position-relative">
+                <img src={img} alt=""/>
             </div>
-            <div className="btn-cart">
-                <button onClick={() => handleAddToCart(product)}>
-                    <p className="btn-text">Add to cart</p>
-                    <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
-                </button>
+            <p className='mt-2 mb-0' style={{fontWeight:500, fontSize:"15px"}}>{name}</p>
 
-                <button onClick={() => handleRemoveFromCart(product)}>
-                    <p>Remove from cart</p>
-                </button>
+            <div className="my-3 d-flex justify-content-between w-100">
+                <span>
+                    <p className='mb-0'>Price: ${price}</p>
+                    <p className='mb-0'>Manufacturer: {seller}</p>
+                </span>
+                <span>
+                    <p >Rating: {ratings}</p>
+                </span>
+
+            </div>
+            <div className=" w-100 d-flex justify-content-between">
+                <Button onClick={() => handleAddToCart(product)}>
+                    Add to cart
+                    <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
+                </Button>
+
+                <FontAwesomeIcon onClick={() => handleAddToFavourite(product)} style={{fontSize:"2rem"}} icon={faHeart} />
+
+                <Button variant="danger" onClick={() => handleRemoveFromCart(product)}>
+                    Remove from cart
+                </Button>
             </div>
 
 

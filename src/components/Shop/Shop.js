@@ -2,10 +2,12 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
+import SelectedItem from '../SelectedItem/SelectedItem';
 import { addToDb, getStoredCart, removeFromCart } from '../Utilities/FakeDb';
 import './Shop.css';
 
-const Shop = () => {
+const Shop = ({setShow, show, handleAddToFavourite}) => {
+
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
@@ -30,14 +32,15 @@ const Shop = () => {
     }, [products])
 
     const handleAddToCart = (selectedProduct) => {
-        // console.log(selectedProduct)
+        console.log(selectedProduct)
+        console.log(cart)
         let newCart = [];
         const exists = cart.find(product => product.id === selectedProduct.id)
         if (!exists) {
             selectedProduct.quantity = 1;
-            newCart = [...cart, selectedProduct];
+            newCart = [...cart, selectedProduct]
         }
-        else{
+        else {
             const rest = cart.filter(product => product.id !== selectedProduct.id)
             exists.quantity = exists.quantity + 1;
             newCart = [...rest, exists]
@@ -47,32 +50,50 @@ const Shop = () => {
         addToDb(selectedProduct.id);
     }
 
-    const handleRemoveFromCart = (product) => {
-        const { id } = product;
+    const handleRemoveFromCart = (selectedCartProduct) => {
+        // console.log("clicked", selectedCartProduct)
+        let newCart = [];
+        // console.log("cart from remove", cart)
+        const exists = cart.find(product => product.id === selectedCartProduct.id)
+        console.log("exists from remove", exists)
+        if (exists?.quantity === 1) {
+            const rest = cart.filter(product => product.id !== selectedCartProduct.id)
+            setCart(rest)
+        }
+        else if (exists?.quantity > 0) {
+            const rest = cart.filter(product => product.id !== selectedCartProduct.id)
+            // console.log(rest)
+            exists.quantity = exists.quantity - 1;
+            // console.log(exists)
+            newCart = [...rest, exists]
+            setCart(newCart);
+        }
+        const { id } = selectedCartProduct;
         // removeFrom LocalStorage Cart Data 
         removeFromCart(id);
     }
 
     return (
-        <div className="shop-container">
+        <div className="shop-container w-100 py-4 ps-4">
 
-            <div className="products-container">
+            <div className="products-container ">
                 {
                     products.map(product => <Product
                         key={product.id}
                         product={product}
+                        handleAddToFavourite={handleAddToFavourite}
                         handleAddToCart={handleAddToCart}
                         handleRemoveFromCart={handleRemoveFromCart}
                     ></Product>)
                 }
             </div>
 
-            <div className="card-container">
                 <Cart
+                setShow={setShow}
+                show={show}
                     cart={cart}
                 ></Cart>
-            </div>
-
+        
         </div>
     );
 };
