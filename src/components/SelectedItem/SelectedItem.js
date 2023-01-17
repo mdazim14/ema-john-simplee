@@ -11,7 +11,7 @@ const SelectedItem = ({ item }) => {
             margin: '5px'
         }}>
 
-            <img style={{ width: "100px", height: "80px" }} src={item.img} alt="" />
+            <img style={{ width: "100px", height: "100px" }} src={item.img} alt="" />
             <div style={{ marginLeft: "5px", width: "200px" }}>
                 <p>{item.name}</p>
                 <p>Quantity: {item.quantity}</p>

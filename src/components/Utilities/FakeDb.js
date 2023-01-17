@@ -47,7 +47,6 @@ const removeFromCart = (id) => {
     }
 }
 
-
 const getStoredCart = () => {
     let shoppingCart;
     //get the shopping cart from local storage

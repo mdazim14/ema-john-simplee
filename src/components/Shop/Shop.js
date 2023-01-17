@@ -6,7 +6,7 @@ import SelectedItem from '../SelectedItem/SelectedItem';
 import { addToDb, getStoredCart, removeFromCart } from '../Utilities/FakeDb';
 import './Shop.css';
 
-const Shop = ({setShow, show, handleAddToFavourite}) => {
+const Shop = ({setShow, show , handleAddToFavourite, favourite}) => {
 
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
@@ -32,8 +32,8 @@ const Shop = ({setShow, show, handleAddToFavourite}) => {
     }, [products])
 
     const handleAddToCart = (selectedProduct) => {
-        console.log(selectedProduct)
-        console.log(cart)
+        // console.log(selectedProduct)
+        // console.log(cart)
         let newCart = [];
         const exists = cart.find(product => product.id === selectedProduct.id)
         if (!exists) {
@@ -79,6 +79,7 @@ const Shop = ({setShow, show, handleAddToFavourite}) => {
             <div className="products-container ">
                 {
                     products.map(product => <Product
+                        favourite={favourite}
                         key={product.id}
                         product={product}
                         handleAddToFavourite={handleAddToFavourite}

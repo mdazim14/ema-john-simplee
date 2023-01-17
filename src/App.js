@@ -11,25 +11,42 @@ function App() {
   const [favourite, setFevourite] = useState([]);
 
   const [show, setShow] = useState(false);
+
   const handleCartClick = () => {
     setShow(true)
   }
 
-  // const addToFevourite = (prevState, product) => {
-  //   return [...prevState, product]
-  // }
 
   const handleAddToFavourite = (product) => {
 
-    // setFevourite((prevState) => addToFevourite(prevState, product))
-     setFevourite((prevState) => ([...prevState, product]))
+    const exists = favourite.find(item => item.id === product.id)
+
+    if (!exists) {
+      const newItem = [...favourite, product];
+     setFevourite(newItem);
+    }
+    else{
+      const rest = favourite.filter(item => item.id !== product.id);
+      setFevourite(rest);
+    }
+
   }
+  // console.log("clicked", favourite)
 
-  console.log("added fev", favourite)
+  // const handleAddToFavourite = (product) => {
+  //   // console.log("clicked", product)
 
-  // const handleClick = (event) => {
-  //   console.log(event)
+  //   setFevourite((prevState) => addToFevourite(prevState, product))
+  //   //  setFevourite((prevState) => ([...prevState, product]))
   // }
+
+
+
+  const handleSearch = (event) => {
+
+    console.log("click search", event)
+
+  }
 
 
   return (
@@ -39,8 +56,8 @@ function App() {
       <Button onClick={handleClick} >Clicked two</Button> */}
 
 
-      <Header handleCartClick={handleCartClick} ></Header>
-      <Shop show={show} setShow={setShow} handleAddToFavourite={handleAddToFavourite}></Shop>
+      <Header handleSearch={handleSearch} handleCartClick={handleCartClick} ></Header>
+      <Shop favourite={favourite} show={show} setShow={setShow} handleAddToFavourite={handleAddToFavourite}></Shop>
     </div>
   );
 }
