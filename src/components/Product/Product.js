@@ -1,4 +1,4 @@
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faHeart as solidFaHeart  } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
@@ -7,20 +7,9 @@ import './Product.css';
 
 const Product = (props) => {
     // console.log(props)
-    const [change, setChange] = useState(false);
-    const { handleAddToCart, handleRemoveFromCart, product, handleAddToFavourite, favourite } = props;
-    const { name, img, price, seller, ratings, id } = product;
-
-    console.log(favourite)
-    const exists = favourite.find(item => item.id === id);
-    console.log(exists)
-    // if (!exists) {
-    //     setChange(false);
-    // }
-    // else {
-    //     setChange(true)
-    // }
-
+    // const [change, setChange] = useState(false);
+    const { handleAddToCart, handleRemoveFromCart, product, handleAddToFavourite, index} = props;
+    const { name, img, price, seller, ratings, isFavorite} = product;
 
     return (
         <div className="product">
@@ -44,8 +33,9 @@ const Product = (props) => {
                     Add to cart
                     <FontAwesomeIcon style={{ marginLeft: "10px" }} icon={faShoppingCart}></FontAwesomeIcon>
                 </Button>
-
-                <FontAwesomeIcon onClick={() => handleAddToFavourite(product)} style={change ? { color: "green", fontSize: "2rem" } : { color: "green", fontSize: "2rem" }} icon={faHeart} />
+               {
+                isFavorite ?  <FontAwesomeIcon onClick={() => handleAddToFavourite(product, index)} style={ { color:"red", fontSize: "2rem" }} icon={solidFaHeart} /> :  <FontAwesomeIcon onClick={() => handleAddToFavourite(product, index)} style={ { color: "green", fontSize: "2rem" }} icon={faHeart} />
+               }
 
                 <Button variant="danger" onClick={() => handleRemoveFromCart(product)}>
                     Remove from cart

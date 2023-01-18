@@ -6,15 +6,36 @@ import SelectedItem from '../SelectedItem/SelectedItem';
 import { addToDb, getStoredCart, removeFromCart } from '../Utilities/FakeDb';
 import './Shop.css';
 
-const Shop = ({setShow, show , handleAddToFavourite, favourite}) => {
+const Shop = ({ setShow, show, favourite }) => {
 
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [favoriteProducts, setFavoriteProducts] = useState([]);
 
+    useEffect(() => {
+        getFavoriteProducts()
+    }, [products])
+
+    const getFavoriteProducts = () => {
+        if (products.length > 0) {
+            const newFavoriteProducts = [...products].filter((product) => product.isFavorite === true);
+            setFavoriteProducts(newFavoriteProducts);
+        }
+    }
+
+    console.log(favoriteProducts);
     useEffect(() => {
         fetch('products.json')
             .then(res => res.json())
-            .then(data => setProducts(data))
+            .then(data => {
+                const newData = [...data].map((item) => {
+                    return {
+                        ...item,
+                        isFavorite: false
+                    }
+                })
+                setProducts(newData);
+            })
     }, [])
 
     useEffect(() => {
@@ -30,6 +51,21 @@ const Shop = ({setShow, show , handleAddToFavourite, favourite}) => {
         }
         setCart(savedCart);
     }, [products])
+
+    const handleAddToFavourite = (product, index) => {
+        console.log(product, index)
+        
+        const newData = [...products];
+        if (newData[index].isFavorite === true) {
+            newData[index].isFavorite = false
+        }
+        else {
+
+            newData[index].isFavorite = true
+        }
+        setProducts(newData)
+    }
+
 
     const handleAddToCart = (selectedProduct) => {
         // console.log(selectedProduct)
@@ -57,15 +93,15 @@ const Shop = ({setShow, show , handleAddToFavourite, favourite}) => {
         const exists = cart.find(product => product.id === selectedCartProduct.id)
         console.log("exists from remove", exists)
         if (exists?.quantity === 1) {
-            const rest = cart.filter(product => product.id !== selectedCartProduct.id)
+            const rest = cart.filter(product => product.id !== selectedCartProduct.id);
             setCart(rest)
         }
         else if (exists?.quantity > 0) {
-            const rest = cart.filter(product => product.id !== selectedCartProduct.id)
+            const rest = cart.filter(product => product.id !== selectedCartProduct.id);
             // console.log(rest)
             exists.quantity = exists.quantity - 1;
             // console.log(exists)
-            newCart = [...rest, exists]
+            newCart = [...rest, exists];
             setCart(newCart);
         }
         const { id } = selectedCartProduct;
@@ -78,10 +114,11 @@ const Shop = ({setShow, show , handleAddToFavourite, favourite}) => {
 
             <div className="products-container ">
                 {
-                    products.map(product => <Product
+                    products.map((product, index) => <Product
                         favourite={favourite}
                         key={product.id}
                         product={product}
+                        index={index}
                         handleAddToFavourite={handleAddToFavourite}
                         handleAddToCart={handleAddToCart}
                         handleRemoveFromCart={handleRemoveFromCart}
@@ -89,12 +126,12 @@ const Shop = ({setShow, show , handleAddToFavourite, favourite}) => {
                 }
             </div>
 
-                <Cart
+            <Cart
                 setShow={setShow}
                 show={show}
-                    cart={cart}
-                ></Cart>
-        
+                cart={cart}
+            ></Cart>
+
         </div>
     );
 };
