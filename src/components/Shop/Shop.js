@@ -2,7 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
-import SelectedItem from '../SelectedItem/SelectedItem';
+import SearchBar from '../SearchBar/SearchBar';
+// import SelectedItem from '../SelectedItem/SelectedItem';
 import { addToDb, getStoredCart, removeFromCart } from '../Utilities/FakeDb';
 import './Shop.css';
 
@@ -11,19 +12,17 @@ const Shop = ({ setShow, show, favourite }) => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [favoriteProducts, setFavoriteProducts] = useState([]);
+    const [searchItems, setSearchItems]= useState([]) 
 
     useEffect(() => {
         getFavoriteProducts()
     }, [products])
-
     const getFavoriteProducts = () => {
         if (products.length > 0) {
             const newFavoriteProducts = [...products].filter((product) => product.isFavorite === true);
             setFavoriteProducts(newFavoriteProducts);
         }
     }
-
-    console.log(favoriteProducts);
     useEffect(() => {
         fetch('products.json')
             .then(res => res.json())
@@ -35,6 +34,7 @@ const Shop = ({ setShow, show, favourite }) => {
                     }
                 })
                 setProducts(newData);
+                setSearchItems(newData);
             })
     }, [])
 
@@ -53,20 +53,16 @@ const Shop = ({ setShow, show, favourite }) => {
     }, [products])
 
     const handleAddToFavourite = (product, index) => {
-        console.log(product, index)
-        
-        const newData = [...products];
+        // console.log(product, index)
+        const newData = [...searchItems];
         if (newData[index].isFavorite === true) {
             newData[index].isFavorite = false
         }
         else {
-
             newData[index].isFavorite = true
         }
-        setProducts(newData)
+        setSearchItems(newData)
     }
-
-
     const handleAddToCart = (selectedProduct) => {
         // console.log(selectedProduct)
         // console.log(cart)
@@ -81,7 +77,6 @@ const Shop = ({ setShow, show, favourite }) => {
             exists.quantity = exists.quantity + 1;
             newCart = [...rest, exists]
         }
-
         setCart(newCart);
         addToDb(selectedProduct.id);
     }
@@ -91,7 +86,7 @@ const Shop = ({ setShow, show, favourite }) => {
         let newCart = [];
         // console.log("cart from remove", cart)
         const exists = cart.find(product => product.id === selectedCartProduct.id)
-        console.log("exists from remove", exists)
+        // console.log("exists from remove", exists)
         if (exists?.quantity === 1) {
             const rest = cart.filter(product => product.id !== selectedCartProduct.id);
             setCart(rest)
@@ -109,12 +104,25 @@ const Shop = ({ setShow, show, favourite }) => {
         removeFromCart(id);
     }
 
+    const handleSearch = (event) => {
+        // console.log("abc", event.target.value)
+        const targetValue = event.target.value;
+        
+        const searchItems =  products.filter((item) => item.name.toLowerCase().includes(targetValue.toLowerCase()))
+        // setSearch(searchItems)
+        setSearchItems(searchItems)
+        // console.log("line 117",searchItems)
+    }
     return (
         <div className="shop-container w-100 py-4 ps-4">
 
+            <div className='w-25 m-auto'>
+                <SearchBar handleSearch={handleSearch}></SearchBar>
+            </div>
+
             <div className="products-container ">
                 {
-                    products.map((product, index) => <Product
+                    searchItems.map((product, index) => <Product
                         favourite={favourite}
                         key={product.id}
                         product={product}

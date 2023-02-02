@@ -44,7 +44,7 @@ function App() {
 
   const handleSearch = (event) => {
 
-    console.log("click search", event)
+    console.log("click search", event.target.value)
 
   }
 
@@ -56,8 +56,8 @@ function App() {
       <Button onClick={handleClick} >Clicked two</Button> */}
 
 
-      <Header handleSearch={handleSearch} handleCartClick={handleCartClick} ></Header>
-      <Shop favourite={favourite} show={show} setShow={setShow}></Shop>
+      <Header  handleCartClick={handleCartClick} ></Header>
+      <Shop  favourite={favourite} show={show} setShow={setShow}></Shop>
     </div>
   );
 }
