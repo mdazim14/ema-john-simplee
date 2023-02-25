@@ -1,18 +1,27 @@
 .headerNav {
-height: 80px;
-background-color: #1C2B35;
-display: flex;
+    /* height: 80px; */
+    background-color: #1C2B35;
+    /* display: flex;
 align-items: center;
 justify-content:space-between;
-padding: 0px 139px 0px 146px;
+padding: 0px 200px 0px 100px; */
 }
 
-.headerNav a{
-    color:white;
+.linkWrapper a {
+    font-size: 1rem;
+    color: white;
     text-decoration: none;
-    margin: 0px 20px;
+    border: 1px solid #ffffff;
+    display: block;
+    padding: 0.3rem 1rem;
 }
 
-.headerNav a:hover {
-color: orange;
+.linkWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.linkWrapper a:hover {
+    color: orange;
 }
