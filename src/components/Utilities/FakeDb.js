@@ -39,8 +39,6 @@ const removeFromCart = (id) => {
             
             // delete shoppingCart[id];
             // localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
-
-
             // decrement quantity of cart data and delete id
             const Quantity = shoppingCart[id]
             if (Quantity > 1) {
