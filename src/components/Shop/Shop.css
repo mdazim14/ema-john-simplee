@@ -1,4 +1,5 @@
 .products-container {
+    
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
@@ -7,4 +8,13 @@
     .products-container {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+.categoryName{
+    width: auto;
+    text-decoration:none;
+    padding: 20px;
+    cursor: pointer;
+}
+.categoryName:hover{
+    color: orange;
 }

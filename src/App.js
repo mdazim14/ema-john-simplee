@@ -4,6 +4,8 @@ import Shop from './components/Shop/Shop';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import BrandCollection from './components/BrandCollection';
 
 function App() {
 
@@ -47,17 +49,32 @@ function App() {
     console.log("click search", event.target.value)
 
   }
-
-
   return (
     <div>
       {/* <Button onClick={(event) => console.log(event)} >Clicked me</Button>
       <Button onClick={(event) => handleClick(event)} >Clicked one</Button>
       <Button onClick={handleClick} >Clicked two</Button> */}
+      <Routes>
+        <Route path="/" element={<>
+
+          <Header handleCartClick={handleCartClick} ></Header>
+          <Shop favourite={favourite} show={show} setShow={setShow}></Shop>
+        </>} />
+
+        <Route path="/:brandName" element={<>
+          {/* <h1>home</h1> */}
+
+          <Header handleCartClick={handleCartClick} ></Header>
+          <BrandCollection>
+
+          </BrandCollection>
+          {/* <Shop favourite={favourite} show={show} setShow={setShow}></Shop> */}
+        </>} />
+
+      </Routes>
 
 
-      <Header  handleCartClick={handleCartClick} ></Header>
-      <Shop  favourite={favourite} show={show} setShow={setShow}></Shop>
+
     </div>
   );
 }

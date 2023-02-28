@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
@@ -12,7 +14,8 @@ const Shop = ({ setShow, show, favourite }) => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [favoriteProducts, setFavoriteProducts] = useState([]);
-    const [searchItems, setSearchItems]= useState([]) 
+    const [searchItems, setSearchItems] = useState([]);
+    // const [category, setCategory] = useState([]);
 
     useEffect(() => {
         getFavoriteProducts()
@@ -21,6 +24,7 @@ const Shop = ({ setShow, show, favourite }) => {
         if (products.length > 0) {
             const newFavoriteProducts = [...products].filter((product) => product.isFavorite === true);
             setFavoriteProducts(newFavoriteProducts);
+            // console.log(favoriteProducts);
         }
     }
     useEffect(() => {
@@ -107,17 +111,36 @@ const Shop = ({ setShow, show, favourite }) => {
     const handleSearch = (event) => {
         // console.log("abc", event.target.value)
         const targetValue = event.target.value;
-        
-        const searchItems =  products.filter((item) => item.name.toLowerCase().includes(targetValue.toLowerCase()))
+
+        const searchItems = products.filter((item) => item.name.toLowerCase().includes(targetValue.toLowerCase()))
         // setSearch(searchItems)
         setSearchItems(searchItems)
         // console.log("line 117",searchItems)
     }
+
+    const productName = ['Shoe', 'Pant', 'T-Shirt', 'Bag', 'Hat', 'Bottle', 'Headphone', '- all items'];
+
+    // console.log(category)
+    const handleClick = (e) => {
+        console.log(e.target.innerText)
+    }
+
     return (
         <div className="shop-container w-100 py-4 ps-4">
 
-            <div className='w-25 m-auto'>
-                <SearchBar handleSearch={handleSearch}></SearchBar>
+            <div className=''>
+                <div className='m-1 border d-flex justify-content-center'>
+                    {
+                        // eslint-disable-next-line array-callback-return
+                        productName.map((name, index) => {
+                            return <Link to={name === '- all items'?'/':name} onClick={(e) => handleClick(e)} className='categoryName' >{name}</Link>
+                        })
+                    }
+                </div>
+                <div className='w-50 m-auto'>
+                    <SearchBar handleSearch={handleSearch}></SearchBar>
+                </div>
+
             </div>
 
             <div className="products-container ">
