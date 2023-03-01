@@ -5,32 +5,35 @@ import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchBar from '../SearchBar/SearchBar';
 import { Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 const Header = ({ handleCartClick, handleSearch }) => {
     return (
-        <Row className="bg-dark py-4 w-100">
-            <Col md={2} >
+        <Row className="bg-dark py-4">
+            <Col md={4} >
                 <img className="ps-5" src={logo} alt="" />
             </Col>
-            <Col md={4} >
-                {/* <SearchBar handleSearch={handleSearch}></SearchBar> */}
-            </Col>
-            
+
+
             <Col md={5}>
-                <div className='linkWrapper h-100'>
-                    <a href="/shop">Shop</a>
-                    <a href="/orders">Orders</a>
-                    <a href="/inventory">Inventory</a>
-                    <a href="/about">About</a>
-                    <a href="/profile">Profile</a>
-                    <div className='linkWrapper border'>
-                        <p className='text-white border'> Wish List </p>
-                    </div>
+                <div className='linkWrapper'>
+                    <Link href="/shop">Shop</Link>
+                    <Link href="/orders">Orders</Link>
+                    <Link href="/inventory">Inventory</Link>
+                    <Link href="/about">About</Link>
+                    <Link href="/profile">Profile</Link>
+                </div>
+
+                <div>
+                    
                 </div>
 
             </Col>
-            <Col md={1} className="d-flex align-items-center justify-content-center">
+            <Col md={2} className="linkWrapper">
+                <div>
+                    <Link  className='text-info'> Wish List </Link>
+                </div>
+                <FontAwesomeIcon onClick={handleCartClick} style={{ fontSize: "1rem", color: "#fff458" }} icon={faShoppingCart} />
 
-                <FontAwesomeIcon onClick={handleCartClick} style={{ fontSize: "1rem", color: "#ffffff", marginTop: '10px' }} icon={faShoppingCart} />
 
             </Col>
 

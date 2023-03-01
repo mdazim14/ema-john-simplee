@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import SearchBar from "./SearchBar/SearchBar";
 
 const BrandCollection = () => {
     const { brandName } = useParams();
@@ -26,9 +27,10 @@ const BrandCollection = () => {
                     {
                         // eslint-disable-next-line array-callback-return
                         productName.map((name, index) => {
-                            return <Link to={name === '- all items'?'/': `/${name}`} className='categoryName' >{name}</Link>
+                            return <Link to={name === '- all items'?'/':`/${name}`} className='categoryName' >{name}</Link>
                         })
                     }
+                    
                 </div>
             <h2>Brand Collection-{brandName}</h2>
             {

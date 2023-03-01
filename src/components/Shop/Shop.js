@@ -126,7 +126,7 @@ const Shop = ({ setShow, show, favourite }) => {
     }
 
     return (
-        <div className="shop-container w-100 py-4 ps-4">
+        <div className="shop-container w-100">
 
             <div className=''>
                 <div className='m-1 border d-flex justify-content-center'>
