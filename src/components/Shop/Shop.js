@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
@@ -113,9 +112,7 @@ const Shop = ({ setShow, show, favourite }) => {
         const targetValue = event.target.value;
 
         const searchItems = products.filter((item) => item.name.toLowerCase().includes(targetValue.toLowerCase()))
-        // setSearch(searchItems)
         setSearchItems(searchItems)
-        // console.log("line 117",searchItems)
     }
 
     const productName = ['Shoe', 'Pant', 'T-Shirt', 'Bag', 'Hat', 'Bottle', 'Headphone', '- all items'];

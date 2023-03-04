@@ -8,12 +8,10 @@ import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const Header = ({ handleCartClick, handleSearch }) => {
     return (
-        <Row className="bg-dark py-4">
+        <Row className="bg-dark py-4 w-100">
             <Col md={4} >
                 <img className="ps-5" src={logo} alt="" />
             </Col>
-
-
             <Col md={5}>
                 <div className='linkWrapper'>
                     <Link href="/shop">Shop</Link>
