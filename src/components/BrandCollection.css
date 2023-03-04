@@ -1,0 +1,12 @@
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+.div-design {
+    position: relative;
+    height: 550px;
+}
+.div-style {
+    position: absolute;
+    bottom: 0px
+}

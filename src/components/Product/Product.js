@@ -26,8 +26,8 @@ const Product = (props) => {
                 <span>
                     <p >Rating: {ratings}</p>
                 </span>
-
             </div>
+            
             <div className=" w-100 d-flex justify-content-between">
                 <Button onClick={() => handleAddToCart(product)}>
                     Add to cart
@@ -41,7 +41,6 @@ const Product = (props) => {
                     Remove from cart
                 </Button>
             </div>
-
 
         </div>
     );

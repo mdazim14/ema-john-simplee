@@ -1,9 +1,9 @@
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
 import React from 'react';
 import logo from "../../images/Logo.svg";
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import SearchBar from '../SearchBar/SearchBar';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const Header = ({ handleCartClick, handleSearch }) => {
@@ -20,19 +20,13 @@ const Header = ({ handleCartClick, handleSearch }) => {
                     <Link href="/about">About</Link>
                     <Link href="/profile">Profile</Link>
                 </div>
-
-                <div>
-                    
-                </div>
-
             </Col>
+
             <Col md={2} className="linkWrapper">
                 <div>
-                    <Link  className='text-info'> Wish List </Link>
+                    <Link className='text-info'> Wish List </Link>
                 </div>
                 <FontAwesomeIcon onClick={handleCartClick} style={{ fontSize: "1rem", color: "#fff458" }} icon={faShoppingCart} />
-
-
             </Col>
 
         </Row>
