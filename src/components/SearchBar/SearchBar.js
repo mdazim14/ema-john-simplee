@@ -5,6 +5,7 @@ const SearchBar = ({handleSearch}) => {
 
     return (
         <div className=''>
+            <h1>Last work in january and last push on 7/08/2023 </h1>
             <InputGroup className=""  
             // onBlur={ (event) => handleSearch(event)} 
             >
