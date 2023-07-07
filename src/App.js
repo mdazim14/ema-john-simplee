@@ -23,7 +23,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<>
-
           <Header handleCartClick={handleCartClick} ></Header>
           <Shop favourite={favourite} show={show} setShow={setShow}></Shop>
         </>} />

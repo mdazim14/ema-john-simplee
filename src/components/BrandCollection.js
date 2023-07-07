@@ -44,7 +44,6 @@ const BrandCollection = () => {
                                     <img width='100%' src={item?.img} alt="" />
                                 </div>
 
-
                                 <div className="div-style">
                                 <p className='mt-2 mb-0' style={{ fontWeight: 500, fontSize: "15px" }}>{item?.name}</p>
 
@@ -69,7 +68,6 @@ const BrandCollection = () => {
                                         </Button>
                                     </div>
                                 </div>
-
 
                             </div>
                         )

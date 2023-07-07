@@ -13,7 +13,6 @@ const Cart = (props) => {
     const handleShow = () => setShow(true);
 
     // console.log(cart)
-    
     let total = 0;
     let shipping = 0;
     let quantity = 0;
@@ -22,7 +21,6 @@ const Cart = (props) => {
         total = total + product.price * product.quantity;
         shipping = shipping + product.shipping;
     }
-
     const tax = parseFloat((total * 0.1).toFixed(2));
     const grandTotal = total + shipping + tax;
 
@@ -46,12 +44,8 @@ const Cart = (props) => {
                         ></SelectedItem>)
                     }
                 </div>
-
-
             </Offcanvas.Body>
-
         </Offcanvas>
     );
 };
-
 export default Cart;
